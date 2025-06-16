@@ -4,3 +4,4 @@ pub struct Task {
     pub done: bool,
 }
 
+pub type TaskList = Vec<Task>;

@@ -1,10 +1,14 @@
 mod create;
 mod model;
+mod db;
+mod list;
 
-use crate::create::create;
+use crate::{db::get_tasks, list::list_task};
+
 
 fn main() {
-    let tarefa = create();
-    println!("Tarefa criada: {} - {} - {}", tarefa.name, tarefa.date, tarefa.done);
+    let tasks = get_tasks();
+
+    list_task(tasks);
 }
 
