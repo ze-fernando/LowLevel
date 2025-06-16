@@ -1,3 +1,10 @@
+mod create;
+mod model;
+
+use crate::create::create;
+
 fn main() {
-    println!("Hello, world!");
+    let tarefa = create();
+    println!("Tarefa criada: {} - {} - {}", tarefa.name, tarefa.date, tarefa.done);
 }
+
