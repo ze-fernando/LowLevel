@@ -32,6 +32,7 @@ pub fn create() -> Task{
     };
 
     Task {
+        id: 5,
         name: name.trim().to_string(),
         date: date.trim().to_string(),
         done: done
