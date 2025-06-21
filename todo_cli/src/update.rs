@@ -1,14 +1,10 @@
-use crate::{db::get_tasks, model::{Task, TaskList}};
+use crate::db::get_tasks;
 
 use std::io::{self, Write};
 
-fn generate_new_id(tasks: &TaskList) -> u32 {
-    tasks.iter().map(|t| t.id).max().unwrap_or(0) + 1
-}
 
-
-pub fn create() -> Task{
-    let tasks = get_tasks();
+pub fn update(id: u32) -> bool {
+    let mut arr = get_tasks();
     let mut name = String::new();
     let mut date = String::new();
     let mut done = String::new();
@@ -36,10 +32,16 @@ pub fn create() -> Task{
         _ => false,
     };
 
-    Task {
-        id: generate_new_id(&tasks),
-        name: name.trim().to_string(),
-        date: date.trim().to_string(),
-        done: done
+
+    // procura a task pelo id mutável
+    for task in arr.iter_mut() {
+        if task.id == id {
+            task.name = name;
+            task.date = date;
+            task.done = done;
+            return true; 
+        }
     }
+    false 
 }
+
