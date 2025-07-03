@@ -1,9 +1,9 @@
 mod model;
-mod db;
 mod create;
 mod update;
 mod delete;
 mod list;
+mod json_functions;
 
 use std::io::{self, Write};
 use create::create;
@@ -25,13 +25,13 @@ fn main() {
         print!("Escolha uma opção: ");
         io::stdout().flush().unwrap();
 
-        println!("\n");
         let mut option = String::new();
         io::stdin().read_line(&mut option).unwrap();
 
+        print!("\n");
         match option.trim() {
             "1" => {
-                create();
+                let _ = create();
                 println!("Tarefa criada!");
             }
             "2" => {

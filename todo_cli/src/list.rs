@@ -1,17 +1,19 @@
-use crate::{db::get_tasks};
+use crate::json_functions::get_json;
 
 pub fn list_task(){
-    let array = get_tasks();
+    let path = "./database.json";
+    let array = get_json(path);
     for task in array {
-        println!("{} {} {}", task.name, task.date, task.done);
+        println!("\n{} - {} | {} | {}", task.id, task.name, task.date, task.done);
     }
 }
 
 pub fn list_by_id(id: u32){
-    let array = get_tasks();
+    let path = "./database.json";
+    let array = get_json(path);
     for task in array {
         if task.id == id {
-            println!("{} {} {}", task.name, task.date, task.done);
+            println!("\n{} - {} | {} | {}", task.id, task.name, task.date, task.done);
             break;
         }
     }

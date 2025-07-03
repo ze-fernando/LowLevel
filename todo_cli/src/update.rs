@@ -1,10 +1,8 @@
-use crate::db::get_tasks;
-
 use std::io::{self, Write};
-
+use crate::{model::{Task}};
+use crate::json_functions::update_in_json;
 
 pub fn update(id: u32) -> bool {
-    let mut arr = get_tasks();
     let mut name = String::new();
     let mut date = String::new();
     let mut done = String::new();
@@ -32,16 +30,16 @@ pub fn update(id: u32) -> bool {
         _ => false,
     };
 
+    let new_task = Task {
+        id: id,
+        name:name,
+        date: date,
+        done: done
+    };
 
-    // procura a task pelo id mutável
-    for task in arr.iter_mut() {
-        if task.id == id {
-            task.name = name;
-            task.date = date;
-            task.done = done;
-            return true; 
-        }
+    match update_in_json(id, new_task) {
+        Ok(_) => true,
+        Err(_) => false,
     }
-    false 
 }
 
